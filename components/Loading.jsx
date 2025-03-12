@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { ActivityIndicator } from 'react-native-web'
+import { theme } from '../constants/theme'
 
 const Loading = ({size="large", color=theme.colors.primary}) => {
   return (

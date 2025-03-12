@@ -1,7 +1,6 @@
-import { StyleSheet, Text,TextInput, View } from 'react-native'
-import React from 'react'
+import { Pressable, StyleSheet, Text,TextInput, View } from 'react-native'
+import React, { useRef, useState } from 'react'
 import ScreenWrapper from '../components/ScreenWrapper'
-import Home from '../assets/icons/Home'
 import { theme } from '../constants/theme'
 import Icon from '../assets/icons'
 import { StatusBar } from 'expo-status-bar'
@@ -9,10 +8,19 @@ import BackButton from '../components/BackButton'
 import { useRouter } from 'expo-router'
 import { hp,wp } from '../helpers/common'
 import Input from '../components/Input'
+import Button from '../components/Button'
+
 const Login = () => {
   const router = useRouter();
+  const emailRef = useRef("");
+  const passwordRef = useRef("");
+  const [loading,setLoading] = useState(false); // issue with this section when changing to true
+
+  const onSubmit = () => {
+
+  }
   return (
-    <ScreenWrapper>
+    <ScreenWrapper bg="white">
       <StatusBar style="dark" />
       <View style={styles.container}>
         <BackButton router={router}/>
@@ -33,8 +41,27 @@ const Login = () => {
             icon={<Icon name="mail"size={24} strokeWidth={1.6} 
             />}
             placeholder="Enter your email"
-            onChangeText={(value) => {}}
+            onChangeText={(value) => emailRef.current = value }
           />
+          <Input 
+            icon={<Icon name="lock"size={24} strokeWidth={1.6} 
+            />}
+            placeholder="Enter your password"
+            secureTextEntry
+            onChangeText={(value) => passwordRef.current = value }
+          />
+          <Text style={styles.forgotPassword}>
+              Forgot Password?  
+          </Text>
+          <Button title={'Login'} loading={loading} onPress={onSubmit} />
+        </View>
+
+        {/* footer */}
+        <View style={styles.footer}>
+            <Text style={styles.footerText}>Don't have an account?</Text>
+            <Pressable>
+              <Text style={[styles.footerText,{color:theme.colors.primaryDark, fontWeight: theme.fonts.semibold }]}>Sign Up</Text>
+            </Pressable>
         </View>
       </View>
     </ScreenWrapper>

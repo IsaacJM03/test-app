@@ -19,7 +19,8 @@ const Welcome = () => {
           {/*title*/}
           <View style={{gap: 20}}>
             <Text style={styles.title}>Christ Praises</Text>
-            <Text style={styles.punchline}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, turpis nec aliquam.</Text>
+            <Text style={styles.punchline}>“And they overcame him by the blood of the Lamb and by the word of their testimony, and they did not love their lives to the death.”</Text>
+            <Text style={{fontSize: hp(1.8),textAlign:'center',fontWeight:theme.fonts.medium}}>Revelation 12:11</Text>
           </View>
 
           {/*footer*/}
@@ -68,8 +69,9 @@ const styles = StyleSheet.create({
   punchline: {
     textAlign: 'center',
     paddingHorizontal: wp(10),
-    fontSize: hp(1.7),
+    fontSize: hp(1.9),
     color: theme.colors.text,
+    fontWeight: theme.fonts.semibold
   },
   footer: {
     gap: 30,
