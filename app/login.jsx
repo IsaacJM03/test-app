@@ -9,6 +9,7 @@ import { useRouter } from 'expo-router'
 import { hp,wp } from '../helpers/common'
 import Input from '../components/Input'
 import Button from '../components/Button'
+import { supabase } from '../lib/supabase'
 
 const Login = () => {
   const router = useRouter();
@@ -16,10 +17,27 @@ const Login = () => {
   const passwordRef = useRef("");
   const [loading,setLoading] = useState(false); // issue with this section when changing to true
 
-  const onSubmit = () => {
-    if(emailRef.current === "" || passwordRef.current === ""){
+  const onSubmit = async () => {
+    if(!emailRef.current || !passwordRef.current){
       Alert.alert("Please fill all fields");
       return;
+    }
+    let email = emailRef.current.trim();
+    let password = passwordRef.current.trim();
+    setLoading(true);
+
+    const {error} = await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
+
+    setLoading(false);
+    
+    console.log('error',error);
+    if (error) {
+      Alert.alert("Login",error.message);
+      // setLoading(false);
+      // return;
     }
   }
   return (

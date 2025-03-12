@@ -9,6 +9,7 @@ import { useRouter } from 'expo-router'
 import { hp,wp } from '../helpers/common'
 import Input from '../components/Input'
 import Button from '../components/Button'
+import { supabase } from '../lib/supabase'
 
 const SignUp = () => {
   const router = useRouter();
@@ -18,7 +19,7 @@ const SignUp = () => {
   const [loading,setLoading] = useState(false);
 
   const onSubmit = async () => {
-    if(emailRef.current === "" || passwordRef.current === ""){
+    if(!emailRef.current|| !passwordRef.current){
       Alert.alert("Sign Up","Please fill all fields!");
       return;
     }
@@ -33,7 +34,7 @@ const SignUp = () => {
       email,
       password,
       options: {
-        data : {
+        data: {
           name
         }
       }
