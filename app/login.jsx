@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text,TextInput, View } from 'react-native'
+import { Alert,Pressable, StyleSheet, Text,TextInput, View } from 'react-native'
 import React, { useRef, useState } from 'react'
 import ScreenWrapper from '../components/ScreenWrapper'
 import { theme } from '../constants/theme'
@@ -17,7 +17,10 @@ const Login = () => {
   const [loading,setLoading] = useState(false); // issue with this section when changing to true
 
   const onSubmit = () => {
-
+    if(emailRef.current === "" || passwordRef.current === ""){
+      Alert.alert("Please fill all fields");
+      return;
+    }
   }
   return (
     <ScreenWrapper bg="white">
@@ -59,7 +62,7 @@ const Login = () => {
         {/* footer */}
         <View style={styles.footer}>
             <Text style={styles.footerText}>Don't have an account?</Text>
-            <Pressable>
+            <Pressable onPress={() => router.push('signUp')}>
               <Text style={[styles.footerText,{color:theme.colors.primaryDark, fontWeight: theme.fonts.semibold }]}>Sign Up</Text>
             </Pressable>
         </View>
